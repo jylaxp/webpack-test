@@ -23,4 +23,12 @@ new webpack.DllReferencePlugin({
 new AddAssetHtmlWebpackPlugin({
     filepath: resolve(__dirname, 'dll/jquery.js')
 })
-})
+```
+
+### externals
+```javascript
+//  忽略 jqeury打包， 使用CDN 的 jquery, 但是需要手动引入
+externals:{
+    jquery: 'jQuery'
+}
+```
