@@ -3,16 +3,16 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 
-modules.exports = {
+module.exports = {
     entry: {
         jquery: ['jquery'],
     },
 
     output: {
-        file: '[name].js',
+        filename: '[name].js',
         path: resolve(__dirname, 'dll'),
         // 打包的库里面向外暴露出去的内容名字
-        libary: '[name]_[hash]'
+        library: '[name]_[hash]'
     },
 
     plugins: [

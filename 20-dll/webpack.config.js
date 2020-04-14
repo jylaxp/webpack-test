@@ -1,11 +1,7 @@
 /* jshint esversion: 6 */
-
-/**
- * webpack.config.js webpack配置文件
- *  模块化默认采用commonjs
- */
-
 const { resolve } = require('path');
+const webpack = require('webpack');
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -33,10 +29,20 @@ module.exports = {
             template: './src/index.html',
 
             // HTML 压缩
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true
-            }
+            // minify: {
+            //     collapseWhitespace: true,
+            //     removeComments: true
+            // }
+        }),
+
+        // 告诉webpack 哪些库不需要打包，同时使用名称也得变
+        new webpack.DllReferencePlugin({
+            manifest: resolve(__dirname, 'dll/manifest.json')
+        }),
+        
+        // 映入打包的文件，添加到html中
+        new AddAssetHtmlWebpackPlugin({
+            filepath: resolve(__dirname, 'dll/jquery.js')
         })
     ],
     optimization: {
